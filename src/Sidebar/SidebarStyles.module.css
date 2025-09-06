@@ -1,0 +1,22 @@
+.navbarContainer{
+    width: 240px;
+    height: 100vh;
+    background-color: var(--sidebar-color);
+    color: var(--text-color);
+}
+.vector{
+    display: flex;
+    justify-content: end;
+}
+.vector img{
+    height: 20px;
+    width: 20px;
+}
+.logo{
+    display: flex;
+    align-items: center;
+}
+.logo img{
+    width: 40px;
+    height: 40px;
+}

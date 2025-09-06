@@ -1,0 +1,20 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root{
+    --sidebar-color: #132450;
+    --text-color: #ffffff;
+    --green-color: #3EBC5E;
+    --orange-color: #FF9500;
+    --mint-color: #00C7BE;
+    --yellow-color: #FFCC00;
+    --blue-color: #007AFF;
+    --indigo-color: #5856D6;
+    --purple-color: #AF52DE;
+    --pink-color: #FF2D55;
+    --brown-color: #A2845E;
+    --red-color: #B50022;
+}
