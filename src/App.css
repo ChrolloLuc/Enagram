@@ -18,3 +18,7 @@
     --brown-color: #A2845E;
     --red-color: #B50022;
 }
+
+.layout{
+    display: flex;
+}
