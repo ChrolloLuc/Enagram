@@ -5,7 +5,6 @@
     display: flex;
     align-items: center;
     flex-direction: column;
-    border: 1px solid red;
 }
 .headerContainer{
     display: flex;
@@ -52,17 +51,100 @@
     font-size: 16px;
     font-family: inherit;
 }
-.compareButton button{
-    background-color: rgba(56, 58, 72, 0.6);
+.compareBtn {
     width: 142px;
     height: 48px;
-    color: white;
+    color: #fff;
     border: none;
     border-radius: 6px;
     font-weight: 400;
     font-family: Helvetica;
     cursor: pointer;
 }
-.compareButton button:hover{
-    background-color: rgba(56, 58, 72, 0.8);
+.active{
+  background-color: hsl(223, 75%, 58%); 
+}
+.active:hover{
+    background-color: hsl(223, 75%, 48%)
+}
+.inactive{
+  background-color: #383A4899; 
+  cursor: not-allowed;
+}
+.inactive:hover{
+  background-color: hsla(233, 13%, 25%, 0.5); 
+}
+
+.progressCard {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  padding: 20px;
+  border: 1px solid #e0e0e0;
+  border-radius: 12px;
+  background: white;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  width: 350px;
+}
+
+.circle {
+  width: 30px;
+  height: 30px;
+  border: 3px solid #3f6df5;
+  border-radius: 50%;
+  position: relative;
+}
+
+.circle::before {
+  content: "";
+  width: 8px;
+  height: 8px;
+  background: #3f6df5;
+  border-radius: 50%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  animation: pulse 1s infinite;
+}
+
+@keyframes pulse {
+  0% { transform: translate(-50%, -50%) scale(1); opacity: 1; }
+  50% { transform: translate(-50%, -50%) scale(1.4); opacity: 0.6; }
+  100% { transform: translate(-50%, -50%) scale(1); opacity: 1; }
+}
+
+.progressInfo {
+  flex: 1;
+}
+
+.progressRow {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.percent {
+  font-weight: bold;
+  font-size: 18px;
+}
+
+.progressBar {
+  flex: 1;
+  height: 8px;
+  background: #f0f0f0;
+  border-radius: 6px;
+  overflow: hidden;
+}
+
+.progressFill {
+  height: 100%;
+  background: #3f6df5;
+  transition: width 0.3s;
+}
+.loadingWrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 70vh;
 }
