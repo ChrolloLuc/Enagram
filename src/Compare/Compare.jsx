@@ -1,64 +1,72 @@
-import { useState } from "react";
-import styles from "./CompareStyles.module.css";
+import { useState, useEffect, useRef } from "react"
+import styles from "./CompareStyles.module.css"
 
 function Compare() {
-  const [oldText, setOldText] = useState("");
-  const [newText, setNewText] = useState("");
-  const [diff, setDiff] = useState(null);
-  const [loading, setLoading] = useState(false);
-  const [progress, setProgress] = useState(0);
+  const [oldText, setOldText] = useState("")
+  const [newText, setNewText] = useState("")
+  const [loading, setLoading] = useState(false)
+  const [progress, setProgress] = useState(0)
+  const [showHighlighting, setShowHighlighting] = useState(false)
+  const oldTextRef = useRef(null)
+  const newTextRef = useRef(null)
 
   const handleButtonClick = () => {
-    setDiff(null);
-    setLoading(true);
-    setProgress(0);
+    setLoading(true)
+    setProgress(0)
+    setShowHighlighting(false)
 
     let interval = setInterval(() => {
       setProgress((prev) => {
         if (prev >= 100) {
-          clearInterval(interval);
-          doComparison();
-          setLoading(false);
-          return 100;
+          clearInterval(interval)
+          setLoading(false)
+          setShowHighlighting(true)
+          return 100
         }
-        return prev + 5;
-      });
-    }, 200);
-  };
+        return prev + 5
+      })
+    }, 200)
+  }
 
-  const doComparison = () => {
-    const oldChars = oldText.split("");
-    const newChars = newText.split("");
-    const result = [];
+  const generateHighlightedText = (text, isOld = true) => {
+    if (!showHighlighting) return text
 
-    for (let i = 0; i < Math.max(oldChars.length, newChars.length); i++) {
-      if (oldChars[i] === newChars[i]) {
-        result.push(<span key={i}>{oldChars[i]}</span>);
+    const oldChars = oldText.split("")
+    const newChars = newText.split("")
+    const chars = text.split("")
+    const result = []
+
+    for (let i = 0; i < chars.length; i++) {
+      if (isOld) {
+        if (oldChars[i] !== newChars[i]) {
+          result.push(
+            `<span style="background-color: rgba(255, 0, 0, 0.3); color: red;">${
+              chars[i] || ""
+            }</span>`
+          );
+        } else {
+          result.push(chars[i] || "")
+        }
       } else {
-        if (oldChars[i] !== undefined) {
+        if (newChars[i] !== oldChars[i]) {
           result.push(
-            <span key={`old-${i}`} style={{ color: "red" }}>
-              {oldChars[i]}
-            </span>
+            `<span style="background-color: rgba(0, 255, 0, 0.3); color: green;">${
+              chars[i] || ""
+            }</span>`
           );
-        }
-        if (newChars[i] !== undefined) {
-          result.push(
-            <span key={`new-${i}`} style={{ color: "green" }}>
-              {newChars[i]}
-            </span>
-          );
+        } else {
+          result.push(chars[i] || "")
         }
       }
     }
-    setDiff(result);
-  };
+    return result.join("")
+  }
 
   return (
     <section className={styles.container}>
       <div className={styles.headerContainer}>
         <div className={styles.leftSide}>
-          <select>
+          <select className={styles.optionsContainer}>
             <option>ქართული</option>
             <option>ინგლისური</option>
           </select>
@@ -69,6 +77,7 @@ function Compare() {
           <button className={styles.addButton}>⊕ ახლის გახსნა</button>
         </div>
       </div>
+
       {loading ? (
         <div className={styles.loadingWrapper}>
           <div className={styles.progressCard}>
@@ -90,19 +99,63 @@ function Compare() {
       ) : (
         <>
           <div className={styles.textContainer}>
-            <textarea
-              placeholder="დაიწყე წერა..."
-              className={styles.textInput}
-              value={oldText}
-              onChange={(e) => setOldText(e.target.value)}
-            />
+            <div className={styles.textInputWrapper}>
+              <textarea
+                ref={oldTextRef}
+                placeholder="დაიწყე წერა..."
+                className={styles.textInput}
+                value={oldText}
+                onChange={(e) => {
+                  setOldText(e.target.value)
+                  setShowHighlighting(false)
+                }}
+                style={{
+                  color: showHighlighting ? "transparent" : "inherit",
+                  caretColor: "black",
+                }}
+              />
+              {showHighlighting && (
+                <div
+                  className={styles.highlightOverlay}
+                  dangerouslySetInnerHTML={{
+                    __html: generateHighlightedText(oldText, true).replace(
+                      /\n/g,
+                      "<br>"
+                    ),
+                  }}
+                />
+              )}
+            </div>
+
             <p>&hArr;</p>
-            <textarea
-              placeholder="დაიწყე წერა..."
-              className={styles.textInput}
-              value={newText}
-              onChange={(e) => setNewText(e.target.value)}
-            />
+
+            <div className={styles.textInputWrapper}>
+              <textarea
+                ref={newTextRef}
+                placeholder="დაიწყე წერა..."
+                className={styles.textInput}
+                value={newText}
+                onChange={(e) => {
+                  setNewText(e.target.value)
+                  setShowHighlighting(false)
+                }}
+                style={{
+                  color: showHighlighting ? "transparent" : "inherit",
+                  caretColor: "black",
+                }}
+              />
+              {showHighlighting && (
+                <div
+                  className={styles.highlightOverlay}
+                  dangerouslySetInnerHTML={{
+                    __html: generateHighlightedText(newText, false).replace(
+                      /\n/g,
+                      "<br>"
+                    ),
+                  }}
+                />
+              )}
+            </div>
           </div>
 
           <div className={styles.compareButton}>
@@ -110,20 +163,16 @@ function Compare() {
               onClick={handleButtonClick}
               disabled={oldText === "" || newText === ""}
               className={`${styles.compareBtn} ${
-                oldText !== "" && newText !== ""
-                  ? styles.active
-                  : styles.inactive
+                oldText !== "" && newText !== "" ? styles.active : styles.inactive
               }`}
             >
               შედარება
             </button>
           </div>
-
-          <div className={styles.result}>{diff}</div>
         </>
       )}
     </section>
   );
 }
 
-export default Compare;
+export default Compare

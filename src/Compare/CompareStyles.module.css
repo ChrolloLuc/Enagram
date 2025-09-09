@@ -1,78 +1,133 @@
-.container{
-    width: 100%;
-    height: 594px;
-    margin: 24px;
-    display: flex;
-    align-items: center;
-    flex-direction: column;
+.container {
+  width: 100%;
+  height: 594px;
+  margin: 24px;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
 }
-.headerContainer{
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    border-bottom: 1px solid #EDEDED;
-    width: 100%;
-    height: 58px;
-    box-sizing: border-box;
+
+.headerContainer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #EDEDED;
+  width: 100%;
+  height: 58px;
+  box-sizing: border-box;
 }
-.addButton{
-    color: #fff;
-    font-size: 16px;
-    font-weight: 400;
-    font-family: Helvetica, sans-serif;
-    line-height: 28px;
-    background-color: #383A4899;
-    padding: 15px 10px;
-    min-width: 150px;
-    min-height: 42px;
-    border-radius: 6px;
-    border: 1px solid #383A4899;
+
+.leftSide {
+  display: flex;
+  align-items: center;
+  gap: 10px;
 }
-.textContainer{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
-    padding: 24px;
-    gap: 20px;
+
+.optionsContainer{
+  width: 155px;
+  height: 40px;
+  border-radius: 8px;
+  border: 1px solid #E0E0E0;
+  padding: 5px 10px;
+  cursor: pointer;
+  font-family: Helvetica, sans-serif;
 }
-.textContainer p{
-    font-size: 20px;
+
+.addButton {
+  color: #fff;
+  font-size: 16px;
+  font-weight: 400;
+  font-family: Helvetica, sans-serif;
+  line-height: 28px;
+  background-color: #4571E4;
+  padding: 15px 10px;
+  width: 150px;
+  height: 42px;
+  border-radius: 6px;
+  border: 1px solid #4571E4;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
 }
+
+.textContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  padding: 24px 0;
+  gap: 20px;
+}
+
+.textContainer p {
+  font-size: 20px;
+}
+
+.textInputWrapper {
+  position: relative;
+  flex: 1;
+  min-width: 0;
+  max-width: 900px;
+}
+
 .textInput {
-    background-color: #F0F7FF;
-    flex: 1;
-    min-width: 0;
-    height: 432px;
-    max-width: 900px;
-    border: none;
-    outline: none;
-    padding: 10px;
-    font-size: 16px;
-    font-family: inherit;
+  background-color: #F0F7FF;
+  width: 100%;
+  height: 432px;
+  border: none;
+  outline: none;
+  padding: 10px;
+  font-size: 16px;
+  font-family: inherit;
+  border-radius: 8px;
+  resize: none;
+  box-sizing: border-box;
 }
+
+.highlightOverlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 432px;
+  padding: 10px;
+  font-size: 16px;
+  font-family: inherit;
+  pointer-events: none;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+  overflow: hidden;
+  box-sizing: border-box;
+  background-color: transparent;
+  border-radius: 8px;
+}
+
 .compareBtn {
-    width: 142px;
-    height: 48px;
-    color: #fff;
-    border: none;
-    border-radius: 6px;
-    font-weight: 400;
-    font-family: Helvetica;
-    cursor: pointer;
+  width: 142px;
+  height: 48px;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  font-weight: 400;
+  font-family: Helvetica;
+  cursor: pointer;
 }
-.active{
-  background-color: hsl(223, 75%, 58%); 
+
+.active {
+  background-color: hsl(223, 75%, 58%);
 }
-.active:hover{
-    background-color: hsl(223, 75%, 48%)
+
+.active:hover {
+  background-color: hsl(223, 75%, 48%);
 }
-.inactive{
-  background-color: #383A4899; 
+
+.inactive {
+  background-color: #383A4899;
   cursor: not-allowed;
 }
-.inactive:hover{
-  background-color: hsla(233, 13%, 25%, 0.5); 
+
+.inactive:hover {
+  background-color: hsla(233, 13%, 25%, 0.5);
 }
 
 .progressCard {
@@ -83,14 +138,15 @@
   border: 1px solid #e0e0e0;
   border-radius: 12px;
   background: white;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-  width: 350px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  width: 280px;
+  height: 80px;
 }
 
 .circle {
-  width: 30px;
-  height: 30px;
-  border: 3px solid #3f6df5;
+  width: 40px;
+  height: 40px;
+  border: 3px solid #4571E4;
   border-radius: 50%;
   position: relative;
 }
@@ -99,7 +155,7 @@
   content: "";
   width: 8px;
   height: 8px;
-  background: #3f6df5;
+  background: #4571E4;
   border-radius: 50%;
   position: absolute;
   top: 50%;
@@ -109,9 +165,20 @@
 }
 
 @keyframes pulse {
-  0% { transform: translate(-50%, -50%) scale(1); opacity: 1; }
-  50% { transform: translate(-50%, -50%) scale(1.4); opacity: 0.6; }
-  100% { transform: translate(-50%, -50%) scale(1); opacity: 1; }
+  0% {
+    transform: translate(-50%, -50%) scale(1);
+    opacity: 1;
+  }
+
+  50% {
+    transform: translate(-50%, -50%) scale(1.4);
+    opacity: 0.6;
+  }
+
+  100% {
+    transform: translate(-50%, -50%) scale(1);
+    opacity: 1;
+  }
 }
 
 .progressInfo {
@@ -142,9 +209,128 @@
   background: #3f6df5;
   transition: width 0.3s;
 }
+
 .loadingWrapper {
   display: flex;
   justify-content: center;
   align-items: center;
   height: 70vh;
+}
+@media (max-width: 1024px) {
+  .container {
+    margin: 16px;
+    height: auto;
+    min-height: 500px;
+  }
+
+  .textContainer {
+    flex-direction: column;
+    gap: 15px;
+    padding: 16px 0;
+  }
+
+  .textInputWrapper{
+    width: 100%;
+  }
+
+  .textContainer p {
+    font-size: 18px;
+    margin: 0;
+  }
+
+  .textInput {
+    height: 300px;
+  }
+
+  .highlightOverlay {
+    height: 300px;
+  }
+
+  .headerContainer {
+    flex-direction: column;
+    height: auto;
+    gap: 12px;
+    padding: 12px 0;
+  }
+
+  .leftSide {
+    justify-content: center;
+    width: 100%;
+  }
+
+  .rightSide {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+  }
+
+  .addButton {
+    width: 200px;
+  }
+}
+
+@media (max-width: 768px) {
+  .container {
+    margin: 12px;
+    height: auto;
+  }
+
+  .headerContainer {
+    padding: 8px 0;
+  }
+  
+  .textInputWrapper{
+    width: 100%;
+  }
+
+  .leftSide {
+    flex-direction: column;
+    gap: 8px;
+    align-items: center;
+  }
+
+  .optionsContainer {
+    width: 200px;
+  }
+
+  .addButton {
+    width: 200px;
+    font-size: 14px;
+  }
+
+  .textContainer {
+    padding: 12px 0;
+    gap: 10px;
+  }
+
+  .textInput {
+    height: 250px;
+    font-size: 14px;
+  }
+
+  .highlightOverlay {
+    height: 250px;
+    font-size: 14px;
+  }
+
+  .compareBtn {
+    width: 120px;
+    height: 44px;
+    font-size: 14px;
+  }
+
+  .progressCard {
+    width: 250px;
+    height: 70px;
+    padding: 15px;
+  }
+
+  .circle {
+    width: 35px;
+    height: 35px;
+  }
+
+  .percent {
+    font-size: 16px;
+  }
 }

@@ -5,32 +5,52 @@
     color: var(--text-color);
     display: flex;
     flex-direction: column;
+    transition: width 0.3s ease;
 }
+
+.navbarContainer.collapsed {
+    width: 60px;
+}
+
 .container{
     display: flex;
     flex-direction: column;
     height: 100%;
     justify-content: space-between;
 }
+
 .vector{
     display: flex;
     justify-content: end;
     padding: 15px;
 }
+
 .vector img{
     height: 20px;
     width: 20px;
     cursor: pointer;
+    transition: transform 0.3s ease;
 }
+
+.vector img.rotated {
+    transform: rotate(180deg);
+}
+
+.collapsed .vector {
+    justify-content: center;
+}
+
 .logo{
     display: flex;
     align-items: center;
     padding: 15px;
 }
+
 .listItems{
     flex-grow: 1;
     padding: 15px 0 15px 15px;
 }
+
 .listItems ul{
     display: flex;
     gap: 20px;
@@ -39,6 +59,7 @@
     padding: 0;
     margin: 0;
 }
+
 .listItems li{
     display: flex;
     align-items: center;
@@ -46,15 +67,18 @@
     padding: 12px 0;
     cursor: pointer;
 }
+
 .listItems li img{
     width: 20px;
     height: 20px;
 }
+
 .listItems li:active{
     background-color: white;
     color: var(--sidebar-color);
     border-radius: 30px 0 0 30px;
 }
+
 .user{
     display: flex;
     align-items: center;
@@ -63,6 +87,7 @@
     margin-top: auto;
     border-top: 1px solid #9EB9FF33;    
 }
+
 .avatar{
     width: 20px;
     height: 20px;
@@ -74,4 +99,145 @@
     font-weight: bold;
     font-size: 14px;
     color: black;
+}
+
+.collapsedContent {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px 0;
+}
+
+.collapsedIcons {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    align-items: center;
+}
+
+.collapsedIcons img {
+    width: 24px;
+    height: 24px;
+    cursor: pointer;
+    opacity: 0.7;
+    transition: opacity 0.2s ease;
+}
+
+.collapsedIcons img:hover {
+    opacity: 1;
+}
+
+@media (max-width: 1024px) {
+  .navbarContainer {
+    width: 200px;
+  }
+  
+  .navbarContainer.collapsed {
+    width: 60px;
+  }
+
+  .listItems {
+    padding: 10px 0 10px 10px;
+  }
+
+  .listItems ul {
+    gap: 15px;
+  }
+
+  .listItems li {
+    padding: 10px 0;
+    font-size: 14px;
+  }
+
+  .user {
+    padding: 10px;
+  }
+
+  .user span {
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 768px) {
+  .navbarContainer {
+    width: 60px;
+    position: relative;
+  }
+  
+  .navbarContainer.collapsed {
+    width: 40px;
+  }
+
+  .listItems li {
+    justify-content: center;
+    padding: 12px 0;
+  }
+
+  .listItems li::after {
+    content: none;
+  }
+
+  .listItems li {
+    font-size: 0;
+  }
+
+  .listItems li img {
+    width: 24px;
+    height: 24px;
+  }
+
+  .logo {
+    justify-content: center;
+    padding: 10px;
+  }
+
+  .logo img {
+    max-width: 30px;
+  }
+
+  .user {
+    flex-direction: column;
+    align-items: center;
+    padding: 10px 5px;
+    gap: 5px;
+  }
+
+  .user span {
+    display: none; 
+  }
+
+  .avatar {
+    width: 24px;
+    height: 24px;
+    font-size: 12px;
+  }
+
+  .vector {
+    justify-content: center;
+    padding: 10px;
+  }
+}
+
+@media (max-width: 480px) {
+  .navbarContainer {
+    width: 50px;
+  }
+  
+  .navbarContainer.collapsed {
+    width: 35px;
+  }
+
+  .vector img,
+  .listItems li img,
+  .collapsedIcons img {
+    width: 20px;
+    height: 20px;
+  }
+
+  .avatar {
+    width: 20px;
+    height: 20px;
+    font-size: 10px;
+  }
 }
